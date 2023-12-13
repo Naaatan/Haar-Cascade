@@ -208,6 +208,7 @@ pos/poslist.txt
 # NegativeImages
 neg/*.png
 neg/*.jpg
+neg/*.jpeg
 neg/neglist.txt
 
 # Video
