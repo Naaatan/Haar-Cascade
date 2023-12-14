@@ -7,6 +7,7 @@ echo
 
 # 不正解画像リストを作る
 printf "${ESC}[34m%s${ESC}[m\n" '不正解画像リストを作成...'
+rm -rf ./neg/neglist.txt
 ls neg | xargs -I {} echo neg/{} > ./neg/neglist.txt
 printf "${ESC}[33m%s${ESC}[m\n" './neg/neglist.txt'
 echo
