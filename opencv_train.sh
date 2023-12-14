@@ -9,7 +9,8 @@ echo
 printf "${ESC}[34m%s${ESC}[m\n" '不正解画像リストを作成...'
 rm -rf ./neg/neglist.txt
 ls neg | xargs -I {} echo neg/{} > ./neg/neglist.txt
-printf "${ESC}[33m%s${ESC}[m\n" './neg/neglist.txt'
+printf "${ESC}[33m%s${ESC}[m\n" '画像数をカウント...'
+wc -l neg/neglist.txt
 echo
 
 # cascadeoutフォルダのファイルを削除
@@ -20,4 +21,6 @@ echo
 # opencv_traincascadeでカスケード分類器を作成（numPos　は学習データ量の8〜9割程度の数を指定）
 printf "${ESC}[34m%s${ESC}[m\n" '正解画像の学習データ量を入力してください >>'
 read numpos
-opencv_traincascade -data ./cascadeout/ -vec ./vec/posvec.vec -bg ./neg/neglist.txt -numPos $numpos -numNeg 2001  
+printf "${ESC}[34m%s${ESC}[m\n" '不正解画像の学習データ量を入力してください >>'
+read numneg
+opencv_traincascade -data ./cascadeout/ -vec ./vec/posvec.vec -bg ./neg/neglist.txt -numPos $numpos -numNeg $numneg
