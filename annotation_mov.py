@@ -65,14 +65,15 @@ h = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))  # 高さ
 
 cv2.namedWindow("window", cv2.WINDOW_NORMAL)  # windowの生成
 cv2.setMouseCallback("window", mouse_event)  # 描画関数を設定
-offset_frame = 0  # フレーム開始位置
+start_frame = 0  # 動画フレーム開始位置
+offset_frame = 0  # 保存画像連番開始位置
 frame = 0  # フレーム番号
 
 # プログラム全体終了フラグ
 fin_flag = True
 
 # フレーム位置を設定
-cap.set(cv2.CAP_PROP_POS_FRAMES, offset_frame)
+cap.set(cv2.CAP_PROP_POS_FRAMES, start_frame)
 
 # ループ処理
 while fin_flag:
