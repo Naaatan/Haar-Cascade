@@ -67,6 +67,7 @@ cv2.namedWindow("window", cv2.WINDOW_NORMAL)  # windowの生成
 cv2.setMouseCallback("window", mouse_event)  # 描画関数を設定
 start_frame = 0  # 動画フレーム開始位置
 offset_frame = 0  # 保存画像連番開始位置
+skip_frame = 0  # スキップしたフレーム数
 frame = 0  # フレーム番号
 
 # プログラム全体終了フラグ
@@ -91,7 +92,7 @@ while fin_flag:
 
             cv2.putText(
                 paint,
-                str(frame + offset_frame),
+                str(frame + start_frame),
                 (0, h),
                 cv2.FONT_HERSHEY_SIMPLEX,
                 1.0,
@@ -126,7 +127,7 @@ while fin_flag:
             key = cv2.waitKey(10)
             # sキーが押されたら,データの保存,次のフレーム
             if key == ord("s"):
-                save_img(img, frame + offset_frame)
+                save_img(img, frame + offset_frame - skip_frame)
                 point = np.empty((0, 2), dtype=np.int64)
                 break
             # dキーが押されたら,矩形データを削除
@@ -135,6 +136,7 @@ while fin_flag:
             # rキーが押されたら次のフレーム
             elif key == ord("r"):
                 point = np.empty((0, 2), dtype=np.int64)
+                skip_frame += 1
                 break
             # escキーが押されたらプログラム終了
             elif key == 27:
